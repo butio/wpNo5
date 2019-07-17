@@ -1,4 +1,5 @@
 <?php
+//csvのファイルを開いて配列で返す
 function get_csv_list($file_path){
     if(!(file_exists($file_path))){
         return false;
@@ -23,7 +24,7 @@ function get_csv_list($file_path){
         }
     }
 }
-
+//csvの中身の項目数を返す
 function cn_csv($num1){
     $csv = get_csv_list($num1);
     $cn = count($csv);
@@ -33,7 +34,7 @@ function cn_csv($num1){
         return true;
     }
 }
-
+//csvファイルへの書き込み
 function write_csv($num1,$num2,$num3,$num4,$num5,$num6,$num7,$img){
     $fp = @fopen($num1,'a');
     $csv = get_csv_list($num1);
@@ -52,7 +53,7 @@ function write_csv($num1,$num2,$num3,$num4,$num5,$num6,$num7,$img){
     fwrite($fp,"$num".','."$num2".','."$num3".','."$num4".','."$num5".','."$num6".','."$num7"."\n");
     fclose($fp);    
 }
-
+//メッセージの改行コード変換
 function new_line($num1){
     $line=["\r\n","\r","\n"];
     $num1 = str_replace($line,"<br>",$num1);
@@ -67,7 +68,7 @@ function sortByKey($key_name, $sort_order, $array) {
     array_multisort($standard_key_array, $sort_order, $array);
     return $array;
 }
-
+//削除フラグ変更
 function del_csv($file_path,$num2){
     $csv = get_csv_list($file_path);
     $fp = @fopen($file_path,'w');
