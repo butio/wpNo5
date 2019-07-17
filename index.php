@@ -9,6 +9,7 @@ if(isset($_POST['nickname'])){
     $image = $_FILES['image'];
     write_csv($file_path,$nickname,$message,$genre,'',0,date('YmdHis'),$image['tmp_name']);
 }
+//選択
 if(isset($_POST['select'])){
     $select = $_POST['select'];
 }else{
