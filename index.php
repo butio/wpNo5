@@ -2,7 +2,7 @@
 require_once '../../config.php';
 require_once './func.php';
 $file_path = PATH.FILE;
-
+//返信かどうかのチェック
 if(isset($_GET['re'])){
     $re = $_GET['re'];
 }else{
@@ -13,6 +13,7 @@ if(isset($_POST['respons'])){
 }else{
     $respons = 0;
 }
+//値が送られているかチェック
 if(isset($_POST['nickname'])){
     $csv = get_csv_list($file_path);
     $nickname = $_POST['nickname'];
@@ -29,7 +30,7 @@ if(isset($_POST['nickname'])){
     write_csv($file_path,$nickname,$message,$genre,$respons,0,date('YmdHis'),$image['tmp_name']);
 }
 
-//選択
+//選択チェック
 if(isset($_POST['select'])){
     $select = $_POST['select'];
 }else{

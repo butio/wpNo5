@@ -10,6 +10,7 @@ function get_csv_list($file_path){
         }else{
             $data_list = array();
             if(flock($fp,LOCK_EX)){
+                $re_csv;
                 while(($data = fgets($fp))){
                     $data = explode(',' , $data);
                     $data_list[] = $data;
@@ -25,7 +26,11 @@ function get_csv_list($file_path){
                             }
                         }
                     }
-                return $re_csv;
+                if(isset($re_csv)){
+                    return $re_csv;
+                }else{
+                    return false;
+                }
                 flock($fp,LOCK_UN);
                 fclose($fp);
             }

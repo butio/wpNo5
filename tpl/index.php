@@ -108,7 +108,7 @@ if($data[4]==''){
             </table>
     <?php }else{ 
         if($data[3] === $select){?>
-            <table>
+            <table class="table-pd">
             <tr><td></td>
             <td><?php echo $data[0];?>ニックネーム：<?php echo $data[1]; echo " "; ?><?php echo $data[3];
             echo date('Y/m/d H:i:s',strtotime($data[6])); ?><a href="./index.php?re=<?php echo $data[0] ?>">[Re]</a><a href="./index.php?del=<?php echo $data[0] ?>">[削除]</a></td></tr>
