@@ -6,6 +6,7 @@
 	<title>掲示板</title>
     <!-- BootstrapのCSS読み込み -->
     <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/style.css" rel="stylesheet">
     <!-- jQuery読み込み -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- BootstrapのJS読み込み -->
@@ -14,15 +15,21 @@
 </head>
 <body>
 <div class="mx-auto w-50">
+    <?php if(!$re == 0){
+            echo $re.'に返信';
+        }else{
+            $re='';
+        }?>
     <div class="form-group row">
         <div class="col-sm-6">
             <form action="./index.php" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="respons" value="<?php echo $re;?>">
             <span class="label label-default">ニックネーム</span>
             <input class="form-control" id="focusedInput" type="text" name="nickname">
         </div>
         <div class="col-sm-6">
             <span class="label label-default">ジャンル</span>
-            <select class="form-control" id="focusedInput" name="genre">
+            <select name="genre" class="form-control" id="focusedInput">
                 <option value="">選択してください</option>
                 <option value="映画">映画</option>
                 <option value="本">本</option>
@@ -63,28 +70,55 @@
     </div>
 </div>
 </form>
-<?php if($sorted_array){?>
-<?php foreach ($sorted_array as $data){?>
+<?php if($data_list){?>
+<?php foreach ($data_list as $data){?>
 <table>
 <?php
-if($data[5]=='0'){
-    if($select==='全て'){?>
-    <tr><td><?php echo $data[0];?></td>
-    <td>ニックネーム：<?php echo $data[1];
-    echo date('Y/m/d H:i:s',strtotime($data[6])); ?><a href="./index.php?del=<?php echo $data[0] ?>">[削除]</a></td></tr>
-    <tr><td></td><td><?php echo $data[2];?></td></tr>
-    <tr><td></td><td><img src="<?php echo UPLOAD_PATH;echo $data[0] ?>.jpg" width="auto" height="128" alt="<?php echo UPLOAD_PATH;echo $data[0]?>.jpg"></td></tr>
-<?php }else{ 
-    if($data[3] === $select){
-        echo $data[0];?>
-        ニックネーム：<?php echo $data[1];
-        echo date('Y/m/d H:i:s',strtotime($data[6])); ?><a href="./index.php?del=<?php echo $data[0] ?>">[削除]</a><br>
-        <?php echo $data[2];?><br>
-        <img src="<?php echo UPLOAD_PATH;echo $data[0] ?>.jpg" width="auto" height="128" alt="<?php echo UPLOAD_PATH;echo $data[0]?>.jpg"><br>
-    <?php } 
+if($data[4]==''){
+    if($data[5]==0){
+        if($select==='全て'){?>
+            <table>
+            <tr><td><?php echo $data[0];?></td>
+            <td>ニックネーム：<?php echo $data[1]; echo " "; ?><?php echo $data[3];
+            echo date('Y/m/d H:i:s',strtotime($data[6])); ?><a href="./index.php?re=<?php echo $data[0] ?>">[Re]</a><a href="./index.php?del=<?php echo $data[0] ?>">[削除]</a></td></tr>
+            <tr><td></td><td><?php echo $data[2];?></td></tr>
+            <tr><td></td><td><img src="<?php echo UPLOAD_PATH;echo $data[0] ?>.jpg" width="auto" height="128" alt="<?php echo UPLOAD_PATH;echo $data[0]?>.jpg"></td></tr>
+        </table>
+    <?php }else{ 
+        if($data[3] === $select){?>
+            <table>
+            <tr><td><?php echo $data[0];?></td>
+            <td>ニックネーム：<?php echo $data[1]; echo " "; ?><?php echo $data[3];
+            echo date('Y/m/d H:i:s',strtotime($data[6])); ?><a href="./index.php?re=<?php echo $data[0] ?>">[Re]</a><a href="./index.php?del=<?php echo $data[0] ?>">[削除]</a></td></tr>
+            <tr><td></td><td><?php echo $data[2];?></td></tr>
+            <tr><td></td><td><img src="<?php echo UPLOAD_PATH;echo $data[0] ?>.jpg" width="auto" height="128" alt="<?php echo UPLOAD_PATH;echo $data[0]?>.jpg"></td></tr>
+            </table>
+        <?php } 
+        }
+    }
+}else{ 
+    if($data[5]==0){
+        if($select==='全て'){?>
+            <table class="table-pd">
+            <tr><td></td>
+            <td><?php echo $data[0];?>ニックネーム：<?php echo $data[1]; echo " "; ?><?php echo $data[3];
+            echo date('Y/m/d H:i:s',strtotime($data[6])); ?><a href="./index.php?re=<?php echo $data[0] ?>">[Re]</a><a href="./index.php?del=<?php echo $data[0] ?>">[削除]</a></td></tr>
+            <tr><td></td><td><?php echo $data[2];?></td></tr>
+            <tr><td></td><td><img src="<?php echo UPLOAD_PATH;echo $data[0] ?>.jpg" width="auto" height="128" alt="<?php echo UPLOAD_PATH;echo $data[0]?>.jpg"></td></tr>
+            </table>
+    <?php }else{ 
+        if($data[3] === $select){?>
+            <table>
+            <tr><td></td>
+            <td><?php echo $data[0];?>ニックネーム：<?php echo $data[1]; echo " "; ?><?php echo $data[3];
+            echo date('Y/m/d H:i:s',strtotime($data[6])); ?><a href="./index.php?re=<?php echo $data[0] ?>">[Re]</a><a href="./index.php?del=<?php echo $data[0] ?>">[削除]</a></td></tr>
+            <tr><td></td><td><?php echo $data[2];?></td></tr>
+            <tr><td></td><td><img src="<?php echo UPLOAD_PATH;echo $data[0] ?>.jpg" width="auto" height="128" alt="<?php echo UPLOAD_PATH;echo $data[0]?>.jpg"></td></tr>
+            </table>
+        <?php } 
+        }
     }
 }?>
-</table>
 <?php }
 }?>
 </div>

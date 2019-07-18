@@ -2,13 +2,33 @@
 require_once '../../config.php';
 require_once './func.php';
 $file_path = PATH.FILE;
+
+if(isset($_GET['re'])){
+    $re = $_GET['re'];
+}else{
+    $re = 0;
+}
+if(isset($_POST['respons'])){
+    $respons = $_POST['respons'];
+}else{
+    $respons = 0;
+}
 if(isset($_POST['nickname'])){
+    $csv = get_csv_list($file_path);
     $nickname = $_POST['nickname'];
-    $genre = $_POST['genre'];
+    if(!$re){
+        $genre = $_POST['genre'];
+    }else{
+        $genre = $csv[$respons][3];
+    }
+    if($respons==0){
+        $respons='';
+    }
     $message = new_line($_POST['message']);
     $image = $_FILES['image'];
-    write_csv($file_path,$nickname,$message,$genre,'',0,date('YmdHis'),$image['tmp_name']);
+    write_csv($file_path,$nickname,$message,$genre,$respons,0,date('YmdHis'),$image['tmp_name']);
 }
+
 //選択
 if(isset($_POST['select'])){
     $select = $_POST['select'];
@@ -20,11 +40,5 @@ if(isset($_GET['del'])){
 }
 if(($data_list = get_csv_list($file_path)) === false){  
 }
-if(cn_csv($file_path)){
-    $sorted_array = sortByKey('6',SORT_DESC,$data_list);
-}else{
-    $sorted_array = false;
-}
-
 require_once './tpl/index.php';
 ?>

@@ -14,17 +14,26 @@ function get_csv_list($file_path){
                     $data = explode(',' , $data);
                     $data_list[] = $data;
                 }
-                flock
-                ($fp,LOCK_UN);
+                    $list = sortByKey('6',SORT_DESC,$data_list);
+                    foreach ($list as $data) {
+                        if($data[4]==''){
+                            $re_csv[] = $data;
+                            foreach ($list as $data_re) {
+                                if($data[0] == $data_re[4]){
+                                    $re_csv[] = $data_re;
+                                }
+                            }
+                        }
+                    }
+                return $re_csv;
+                flock($fp,LOCK_UN);
                 fclose($fp);
-                return $data_list;
-            }else{
-                return false;
             }
         }
     }
+    
 }
-//csvの中身の項目数を返す
+//csvの中身があるかないかを返す
 function cn_csv($num1){
     $csv = get_csv_list($num1);
     $cn = count($csv);
@@ -34,10 +43,35 @@ function cn_csv($num1){
         return true;
     }
 }
+
+//csvのファイルを開いて配列で返す
+function get_list($file_path){
+    if(!(file_exists($file_path))){
+        return false;
+    }else{
+        $fp = @fopen($file_path,'r');
+        if(!$fp){
+           return false;
+        }else{
+            $data_list = array();
+            if(flock($fp,LOCK_EX)){
+                while(($data = fgets($fp))){
+                    $data = explode(',' , $data);
+                    $data_list[] = $data;
+                }
+                flock($fp,LOCK_UN);
+                fclose($fp);
+                return $data_list;
+            }else{
+                return false;
+            }
+        }
+    }
+}
 //csvファイルへの書き込み
 function write_csv($num1,$num2,$num3,$num4,$num5,$num6,$num7,$img){
     $fp = @fopen($num1,'a');
-    $csv = get_csv_list($num1);
+    $csv = get_list($num1);
     $cn = count($csv);
     $maxNum = array();
     if(isset($csv[0][0])){
@@ -62,6 +96,7 @@ function new_line($num1){
 
 // 指定したキーに対応する値を基準に、配列をソートする
 function sortByKey($key_name, $sort_order, $array) {
+    $standard_key_array = array(); 
     foreach ($array as $key => $value) {
         $standard_key_array[$key] = $value[$key_name];
     }
