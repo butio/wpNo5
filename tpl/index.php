@@ -80,7 +80,7 @@ if($data[4]==''){
             <table>
             <tr><td><?php echo $data[0];?></td>
             <td>ニックネーム：<?php echo $data[1]; echo " "; ?><?php echo $data[3];
-            echo date('Y/m/d H:i:s',strtotime($data[6])); ?><a href="./index.php?re=<?php echo $data[0] ?>">[Re]</a><a href="./index.php?del=<?php echo $data[0] ?>">[削除]</a></td></tr>
+            echo date('Y/m/d H:i:s',strtotime($data[6])); ?><?php if($data[4]==''){?><a href="./index.php?re=<?php echo $data[0] ?>">[Re]</a><?php }?><a href="./index.php?del=<?php echo $data[0] ?>">[削除]</a></td></tr>
             <tr><td></td><td><?php echo $data[2];?></td></tr>
             <tr><td></td><td><img src="<?php echo UPLOAD_PATH;echo $data[0] ?>.jpg" width="auto" height="128" alt="<?php echo UPLOAD_PATH;echo $data[0]?>.jpg"></td></tr>
         </table>
@@ -89,7 +89,7 @@ if($data[4]==''){
             <table>
             <tr><td><?php echo $data[0];?></td>
             <td>ニックネーム：<?php echo $data[1]; echo " "; ?><?php echo $data[3];
-            echo date('Y/m/d H:i:s',strtotime($data[6])); ?><a href="./index.php?re=<?php echo $data[0] ?>">[Re]</a><a href="./index.php?del=<?php echo $data[0] ?>">[削除]</a></td></tr>
+            echo date('Y/m/d H:i:s',strtotime($data[6])); ?><?php if($data[4]==''){?><a href="./index.php?re=<?php echo $data[0] ?>">[Re]</a><?php }?><a href="./index.php?del=<?php echo $data[0] ?>">[削除]</a></td></tr>
             <tr><td></td><td><?php echo $data[2];?></td></tr>
             <tr><td></td><td><img src="<?php echo UPLOAD_PATH;echo $data[0] ?>.jpg" width="auto" height="128" alt="<?php echo UPLOAD_PATH;echo $data[0]?>.jpg"></td></tr>
             </table>
@@ -102,7 +102,7 @@ if($data[4]==''){
             <table class="table-pd">
             <tr><td></td>
             <td><?php echo $data[0];?>ニックネーム：<?php echo $data[1]; echo " "; ?><?php echo $data[3];
-            echo date('Y/m/d H:i:s',strtotime($data[6])); ?><a href="./index.php?re=<?php echo $data[0] ?>">[Re]</a><a href="./index.php?del=<?php echo $data[0] ?>">[削除]</a></td></tr>
+            echo date('Y/m/d H:i:s',strtotime($data[6])); ?><?php if($data[4]==''){?><a href="./index.php?re=<?php echo $data[0] ?>">[Re]</a><?php }?><a href="./index.php?del=<?php echo $data[0] ?>">[削除]</a></td></tr>
             <tr><td></td><td><?php echo $data[2];?></td></tr>
             <tr><td></td><td><img src="<?php echo UPLOAD_PATH;echo $data[0] ?>.jpg" width="auto" height="128" alt="<?php echo UPLOAD_PATH;echo $data[0]?>.jpg"></td></tr>
             </table>
@@ -111,7 +111,7 @@ if($data[4]==''){
             <table class="table-pd">
             <tr><td></td>
             <td><?php echo $data[0];?>ニックネーム：<?php echo $data[1]; echo " "; ?><?php echo $data[3];
-            echo date('Y/m/d H:i:s',strtotime($data[6])); ?><a href="./index.php?re=<?php echo $data[0] ?>">[Re]</a><a href="./index.php?del=<?php echo $data[0] ?>">[削除]</a></td></tr>
+            echo date('Y/m/d H:i:s',strtotime($data[6])); ?><?php if($data[4]==''){?><a href="./index.php?re=<?php echo $data[0] ?>">[Re]</a><?php }?><a href="./index.php?del=<?php echo $data[0] ?>">[削除]</a></td></tr>
             <tr><td></td><td><?php echo $data[2];?></td></tr>
             <tr><td></td><td><img src="<?php echo UPLOAD_PATH;echo $data[0] ?>.jpg" width="auto" height="128" alt="<?php echo UPLOAD_PATH;echo $data[0]?>.jpg"></td></tr>
             </table>

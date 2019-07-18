@@ -15,15 +15,13 @@ if(isset($_POST['respons'])){
 }
 //値が送られているかチェック
 if(isset($_POST['nickname'])){
-    $csv = get_csv_list($file_path);
+    $csv = get_list($file_path);
     $nickname = $_POST['nickname'];
-    if(!$re){
+    if($respons==0){
         $genre = $_POST['genre'];
     }else{
-        $genre = $csv[$respons][3];
-    }
-    if($respons==0){
-        $respons='';
+        $re_text = $respons-1;
+        $genre = $csv[$re_text][3];
     }
     $message = new_line($_POST['message']);
     $image = $_FILES['image'];
